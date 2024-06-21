@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewShield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Review2.css') }}">
+</head>
+<body>
+
+<header>
+      <h2 id="homeLink">ReviewShield</h2>
+      <div class="header_links">
+        <a href="#">HOME</a>
+        <a href="/categories">CATEGORIES</a>
+        <a href="/about">ABOUT</a>
+        <a href="/faq">WHY US</a>
+        <a href="/contact">TEAM</a>
+        <div class="eknew">
+          <div class="user-profile"></div>
+          <!-- <span class="profile-name">John Doe</span> -->
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="left-column">
+        <div class="left_top">
+          <h3>Recent Searches</h3>
+          <ul id="searchResults"></ul>
+        </div>
+        <div class="price_meter left_btm">
+          <input
+            type="text"
+            class="search-bar"
+            placeholder="Min Price"
+            id="minPriceInput"
+          />
+          <input
+            type="text"
+            class="search-bar"
+            placeholder="Max Price"
+            id="maxPriceInput"
+          />
+          <button id="priceSortButton">Sort It</button>
+        </div>
+      </div>
+      <!-- <div class="right-column">
+        <input type="text" class="search-bar" placeholder="Search..." id="searchInput">
+        <div id="productCards"></div>
+    </div> -->
+      <div class="right-column">
+        <div class="search-bar-container">
+          <input
+            type="text"
+            class="search-bar"
+            placeholder="Search..."
+            id="searchInput"
+          />
+          <button id="submitButton">Search It</button>
+        </div>
+        <div id="productCards" class="product-cards"></div>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="{{ url_for('static', filename='script/script.js') }}"></script>
+
+</body>
+</html>

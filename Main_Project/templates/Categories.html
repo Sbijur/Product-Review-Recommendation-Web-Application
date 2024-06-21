@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReviewShield</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/Review2.css') }}"
+    />
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #544c4c;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:hover {
+        background-color: #f2f2f2;
+      }
+      .category-columns {
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .hd_cat {
+        width: 60%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1.5px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .kuchthohai {
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      .instructions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .drop_down_div {
+        width: 20%;
+        margin: 20px auto;
+      }
+
+      #categoryDropdown {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #fff;
+        color: #403f3f;
+      }
+
+      /* Style dropdown options */
+      #categoryDropdown option {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #fff;
+        color: #555;
+      }
+
+      /* Change color of dropdown options on hover */
+      #categoryDropdown option:hover {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2 id="homeLink">ReviewShield</h2>
+      <div class="header_links">
+        <a href="/main">HOME</a>
+        <a href="/categories">CATEGORIES</a>
+        <a href="/about">ABOUT</a>
+        <a href="/faq">WHY US</a>
+        <a href="/contact">TEAM</a>
+        <div class="eknew">
+          <div class="user-profile"></div>
+          <!-- <span class="profile-name">John Doe</span> -->
+        </div>
+      </div>
+    </header>
+    <h1 class="hd_cat">Categories</h1>
+  
+    <div>
+      <div class="instructions">
+        <p>
+          Welcome to <strong>ReviewShield</strong>! Discover the latest products in various
+          categories. Please select a category from the dropdown menu below to
+          explore:
+        </p>
+      </div>
+      <div class="drop_down_div">
+        <select id="categoryDropdown" onchange="fetchProducts2(this.value)">
+          <option value="">Select a category</option>
+          {% for category in categories %}
+          <option value="{{ category }}">{{ category }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div id="productCards" class="kuchthohai"></div>
+
+    <script>
+      function fetchProducts2(category) {
+        if (!category) return; // Do nothing if no category selected
+        fetch("static/script/Product_Dataset.csv")
+          .then((response) => response.text())
+          .then((csvData) => {
+            const products = parseCsv(csvData);
+            const filteredProducts = products
+              .filter((product) => product.categories === category)
+              .slice(0, 40);
+            displayProductCards(filteredProducts);
+          });
+      }
+
+      function fetchProducts(category) {
+        fetch("static/script/Product_Dataset.csv")
+          .then((response) => response.text())
+          .then((csvData) => {
+            const products = parseCsv(csvData);
+            const filteredProducts = products
+              .filter((product) => product.categories === category)
+              .slice(0, 40);
+            displayProductCards(filteredProducts);
+          });
+      }
+
+      function parseCsv(csvData) {
+        const lines = csvData.split("\n");
+        const headers = lines[0].split(",").map((header) => header.trim());
+        const products = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const productData = lines[i].split(",");
+          if (productData.length === headers.length) {
+            const product = {};
+            for (let j = 0; j < headers.length; j++) {
+              product[headers[j]] = productData[j].trim();
+            }
+            products.push(product);
+          }
+        }
+
+        return products;
+      }
+
+      function displayProductCards(products) {
+        const productCardsContainer = document.getElementById("productCards");
+        productCardsContainer.innerHTML = "";
+
+        products.slice(0, 100).forEach((product) => {
+          const card = document.createElement("div");
+          card.classList.add("product-card");
+
+          const image = document.createElement("img");
+          image.src = product.image;
+          image.alt = product.name;
+          card.appendChild(image);
+
+          const details = document.createElement("div");
+          details.classList.add("details");
+
+          details.innerHTML = `
+          <h3><a href="#" class="product-link" data-product-id="${
+            product.name
+          }">${truncateText(product.name, 21)}</a></h3>
+            <p>Price: ${product.actual_price}</p>
+            <p>Ratings: ${product.ratings}</p>
+            <a href="${product.link}" target="_blank">Buy Now</a>
+        `;
+
+          card.appendChild(details);
+          productCardsContainer.appendChild(card);
+        });
+
+        const productLinks = document.querySelectorAll(".product-link");
+        productLinks.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const productId = event.target.getAttribute("data-product-id");
+            // Navigate to the product details page with productId
+            window.location.href = `/product_expand.html?productId=${productId}`;
+          });
+        });
+      }
+
+      function truncateText(text, numWords) {
+        if (typeof text !== "string" || text.trim() === "") {
+          return ""; // Handle cases where text is not a valid string
+        }
+        const words = text.split(" ");
+        if (words.length > numWords) {
+          return words.slice(0, numWords).join(" ") + " ...";
+        } else {
+          return text;
+        }
+      }
+
+    </script>
+  </body>
+</html>

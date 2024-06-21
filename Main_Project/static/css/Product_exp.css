@@ -1,0 +1,123 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 3px 40px 0px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+  cursor: pointer;
+}
+
+.user-profile {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    /* Background image properties */
+    background-size: cover;
+    background-position: center;
+
+    background-image: url('https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png');
+}
+
+.prod_det_hd {
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 2rem;
+    border-radius: 5px;
+}
+
+/* Container styling */
+.container {
+    display: flex;
+    width: 70%;
+    margin: 20px auto;
+    padding-top: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Product image styling */
+  .product-image {
+    flex: 1;
+  }
+  
+  .product-image img {
+    width: 250px;
+    height: auto;
+  }
+  
+  /* Product details styling */
+  .product-details {
+    flex: 2;
+    /* padding: 0 60px; */
+    margin-left: 40px;
+  }
+  
+  .product-details h3 {
+    margin-bottom: 10px;
+  }
+  
+  .product-details p {
+    margin-bottom: 5px;
+  }
+  
+
+/* +++++++++++++++++++++++++++++ */
+
+.reviews-container1 {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.review_cont_hd1 {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.review1 {
+  margin-top: 10px;
+}
+
+.single-review1 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.single-review1 h4 {
+  margin-bottom: 5px;
+}
+
+.single-review1 p {
+  margin-bottom: 5px;
+}
+
+.single-review1 p.rating {
+  color: #00c853; /* Green color for positive ratings */
+}
+
+.single-review1 p.review-text {
+  font-style: italic;
+}

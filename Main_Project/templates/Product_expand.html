@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/Product_exp.css') }}"
+    />
+    <!-- Link to your CSS file -->
+
+    <style>
+      header {
+        background-image: linear-gradient(
+          to right,
+          rgb(4, 9, 110),
+          rgb(2, 8, 74)
+        );
+        height: 68px;
+        color: #fff;
+        padding: 3px 40px 0px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h2 {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .header_links {
+        display: flex;
+        align-items: center;
+      }
+
+      .header_links a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 35px;
+      }
+
+      .header_links a:hover {
+        color: #56e5f8;
+      }
+
+      .eknew {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-profile {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 7px;
+
+        /* Background image properties */
+        background-size: cover;
+        background-position: center;
+
+        background-image: url("https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png");
+      }
+
+      /* Button styling */
+
+      .toggle-button {
+        background-color: #4caf50; /* Green */
+        border: 1px solid black;
+        border-radius: 3px;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .toggle-button:hover {
+        background-color: #45a049; /* Darker Green */
+      }
+
+
+      .ratings-box {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 20px;
+        margin: 0 auto; /* Center the box horizontally */
+        width: 200px;
+      }
+
+      .ratings-box p {
+        margin: 5px 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2 id="homeLink">ReviewShield</h2>
+      <div class="header_links">
+        <a href="/main">HOME</a>
+        <a href="/categories">CATEGORIES</a>
+        <a href="/about">ABOUT</a>
+        <a href="/faq">WHY US</a>
+        <a href="/contact">TEAM</a>
+        <div class="eknew">
+          <div class="user-profile"></div>
+          <!-- <span class="profile-name">John Doe</span> -->
+        </div>
+      </div>
+    </header>
+
+    <h2 class="prod_det_hd">Product Details</h2>
+    <div class="container">
+      <div class="product-image">
+        <img
+          id="productImage"
+          src="https://picsum.photos/200/200"
+          alt="Product Image"
+        />
+        <!-- Placeholder image, replace with actual product image -->
+      </div>
+      <div class="product-details">
+        <h2 id="productName">Product Name</h2>
+        <a id="productLink" href="#" target="_blank">Click here to purchase</a
+        ><br />
+        <p id="productPrice">Price: $XX.XX</p>
+        <p id="productRating">Rating: X.X</p>
+        <p id="productNumRatings">No. of Ratings: XXX</p>
+      </div>
+    </div>
+
+    <div class="reviews-container1">
+      <h2 class="review_cont_hd1" >
+        <span id="reviewsHeading">Customer Reviews - </span>
+        <button id="toggleReviewsButton" class="toggle-button">
+          Verify Reviews
+        </button>
+      </h2>
+
+      <div id="customerReviews" class="review1">
+        <!-- Reviews will be added here dynamically -->
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='script/script.js') }}"
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Function to extract query parameters from URL
+        function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return "";
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Get the product ID from the URL
+        var productId = getParameterByName("productId");
+        console.log(productId);
+
+        // parsing the dataset to readable format
+        function parseCsv(csvData) {
+          const lines = csvData.split("\n");
+          const headers = lines[0].split(",").map((header) => header.trim()); // Trim headers
+          const products = [];
+
+          for (let i = 1; i < lines.length; i++) {
+            const productData = lines[i].split(",");
+            if (productData.length === headers.length) {
+              // Ensure correct number of columns
+              const product = {};
+              for (let j = 0; j < headers.length; j++) {
+                product[headers[j]] = productData[j].trim(); // Trim product data
+              }
+              products.push(product);
+            }
+          }
+
+          return products;
+        }
+
+        // Function to fetch product details based on product ID
+        function fetchProductDetails(productId) {
+          // Fetch product details based on productId from the CSV file
+          fetch("/static/script/Product_Dataset.csv")
+            .then((response) => response.text())
+            .then((csvData) => {
+              // Parse CSV data
+              const products = parseCsv(csvData);
+
+              // Find the product with matching
+              const product = products.find((item) => item.name === productId);
+              // console.log(productID);
+
+              if (product) {
+                // Populate HTML elements with product details
+                document.getElementById("productName").textContent =
+                  product.name;
+                document
+                  .getElementById("productLink")
+                  .setAttribute("href", product.link);
+                document.getElementById("productPrice").textContent =
+                  "Price: " + product.actual_price;
+                document.getElementById("productRating").textContent =
+                  "Rating: " + product.ratings;
+                document.getElementById("productNumRatings").textContent =
+                  "No. of Ratings: " + product.no_of_ratings;
+
+                // Update the product image src
+                document.getElementById("productImage").src = product.image;
+              } else {
+                console.error("Product not found");
+              }
+            })
+            .catch((error) => console.error("Error fetching CSV file:", error));
+        }
+
+        // Fetch and display product details
+        fetchProductDetails(productId);
+
+        // +++++++++++++++++++++++++++++++++++++++++++++
+
+        function fetchOriginalReviews(productId) {
+          fetchProductReviews(productId);
+        }
+
+        const toggleReviewsButton = document.getElementById(
+          "toggleReviewsButton"
+        );
+        const ratingsBox = document.getElementById("ratingsBox");
+        // ratingsBox.style.display = "none";
+
+        const customerReviews = document.getElementById("customerReviews");
+
+        let originalReviews = true;
+
+        toggleReviewsButton.addEventListener("click", function () {
+
+          if (originalReviews) {
+            // If currently displaying original reviews, switch to true reviews
+            fetchTrueReviews(productId);
+            document.getElementById("reviewsHeading").textContent = "Actual Customer Reviews -";
+            originalReviews = false;
+            toggleReviewsButton.style.backgroundColor = "#f44336";
+          } else {
+            // If currently displaying true reviews, switch back to original reviews
+            fetchOriginalReviews(productId);
+            document.getElementById("reviewsHeading").textContent = "Customer Reviews -";
+            originalReviews = true;
+            toggleReviewsButton.style.backgroundColor = "#4CAF50";
+          }
+        });
+
+        function fetchProductReviews(productId) {
+          const first7Words = productId.split(" ").slice(0, 7).join(" ");
+          fetch("/static/script/Amazon_Reviews_5000 - Copy.csv")
+            .then((response) => response.text())
+            .then((csvData) => {
+              const reviews = parseCsv2(csvData);
+
+              const productReviews = reviews.filter((review) => {
+                const productNamefirst7Words = review["Product Name"]
+                  .split(" ")
+                  .slice(0, 7)
+                  .join(" ");
+                // console.log(productNamefirst7Words);
+                return productNamefirst7Words === first7Words;
+              });
+
+              displayReviews(productReviews.slice(0, 8));
+            })
+            .catch((error) =>
+              console.error("Error fetching reviews CSV file:", error)
+            );
+        }
+
+        // True Reviews
+        function fetchTrueReviews(productId) {
+          // Fetch reviews from the new CSV file
+          fetch("/static/TrueReviews.csv")
+            .then((response) => response.text())
+            .then((csvData) => {
+              const reviews = parseCsv2(csvData);
+              displayReviews(reviews);
+            })
+            .catch((error) =>
+              console.error("Error fetching true reviews CSV file:", error)
+            );
+        }
+
+        function displayReviews(reviews) {
+          const reviewsContainer = document.getElementById("customerReviews");
+          reviewsContainer.innerHTML = "";
+
+
+          // Display ratings box
+          const ratingsBox = document.createElement("div");
+          ratingsBox.classList.add("ratings-box");
+
+          // Get the rating and actual rating from the first review
+          const firstReview = reviews[0];
+          // const originalRating = parseFloat(firstReview["Rating"]);
+          const actualRating = parseFloat(firstReview["Actual_rating"]);
+
+          // Display original rating and actual rating in the box
+          // const originalRatingElement = document.createElement("p");
+          // originalRatingElement.textContent = `Original Rating: ${originalRating.toFixed(1)}`;
+          // ratingsBox.appendChild(originalRatingElement);
+
+          const actualRatingElement = document.createElement("p");
+          actualRatingElement.textContent = `Actual Rating: ${actualRating.toFixed(1)}`;
+          ratingsBox.appendChild(actualRatingElement);
+
+          // Append the ratings box to the reviews container
+          reviewsContainer.appendChild(ratingsBox);
+
+          // console.log(reviews);
+
+          reviews.forEach((review) => {
+            const singleReview = document.createElement("div");
+            singleReview.classList.add("single-review1");
+
+            const reviewerNameDate = document.createElement("h4");
+            reviewerNameDate.textContent = `${review["Reviewer Name"]} (${review["Rating Date"]})`;
+            singleReview.appendChild(reviewerNameDate);
+
+            const rating = document.createElement("p");
+            rating.textContent = `Rating: ${review["Rating_full"]}`;
+            singleReview.appendChild(rating);
+
+            const reviewText = document.createElement("p");
+            const truncatedReview = truncateReviewText(review["Review_Text"]);
+            reviewText.textContent = truncatedReview;
+            singleReview.appendChild(reviewText);
+
+            // Exapmd review limit
+            if (review["Review_Text"].split(" ").length > 40) {
+              const readMoreLink = document.createElement("a");
+              readMoreLink.textContent = "Read More...";
+              // readMoreLink.href = "#";
+              readMoreLink.classList.add("read-more-link");
+              readMoreLink.addEventListener("click", () => {
+                reviewText.textContent = review["Review_Text"];
+                readMoreLink.style.display = "none";
+              });
+              singleReview.appendChild(readMoreLink);
+            }
+
+            reviewsContainer.appendChild(singleReview);
+          });
+
+          sendReviewsToServer(reviews);
+        }
+
+        function sendReviewsToServer(reviews) {
+          fetch("/save_reviews", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ reviews: reviews }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Reviews sent successfully");
+              } else {
+                console.error("Failed to send reviews");
+              }
+            })
+            .catch((error) => console.error("Error sending reviews:", error));
+        }
+
+        function truncateReviewText(text) {
+          const words = text.split(" ");
+          if (words.length > 40) {
+            return words.slice(0, 40).join(" ") + " ...";
+          }
+          return text;
+        }
+
+        function parseCsv2(csvData) {
+          const lines = csvData.split("\n");
+          const headers = lines[0].split(",").map((header) => header.trim());
+          const reviews = [];
+
+          for (let i = 1; i < lines.length; i++) {
+            const reviewData = lines[i].split(",");
+            if (reviewData.length === headers.length) {
+              const review = {};
+              for (let j = 0; j < headers.length; j++) {
+                review[headers[j]] = reviewData[j].trim();
+              }
+              reviews.push(review);
+            }
+          }
+
+          return reviews;
+        }
+
+        fetchOriginalReviews(productId);
+      });
+    </script>
+  </body>
+</html>

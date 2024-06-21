@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='images/favicon.png') }}"
+      type=""
+    />
+
+    <title>ReviewShield</title>
+
+    <!-- bootstrap core css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/bootstrap.css') }}"
+    />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--owl slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+
+    <!-- font awesome style -->
+    <link
+      href="{{ url_for('static', filename='css/font-awesome.min.css') }}"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link
+      href="{{ url_for('static', filename='css/style.css') }}"
+      rel="stylesheet"
+    />
+    <!-- responsive style -->
+    <link
+      href="{{ url_for('static', filename='css/responsive.css') }}"
+      rel="stylesheet"
+    />
+
+    <style>
+      header {
+        background-image: linear-gradient(
+          to right,
+          rgb(4, 9, 110),
+          rgb(2, 8, 74)
+        );
+        height: 68px;
+        color: #fff;
+        padding: 3px 40px 0px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h4 {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .header_links {
+        display: flex;
+        align-items: center;
+      }
+
+      .header_links a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 35px;
+      }
+
+      .header_links a:hover {
+        color: #56e5f8;
+      }
+
+      .eknew {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-profile {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 7px;
+
+        /* Background image properties */
+        background-size: cover;
+        background-position: center;
+
+        background-image: url("https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png");
+      }
+    </style>
+  </head>
+
+  <body class="sub_page">
+    <div class="hero_area">
+      <div class="hero_bg_box">
+        <div class="bg_img_box">
+          <img src="images/hero-bg.png" alt="" />
+        </div>
+      </div>
+
+      <!-- header section strats -->
+      <header>
+        <h4 id="homeLink">ReviewShield</h4>
+        <div class="header_links">
+          <a href="/main">HOME</a>
+          <a href="/categories">CATEGORIES</a>
+          <a href="/about">ABOUT</a>
+          <a href="/faq">WHY US</a>
+          <a href="/contact">TEAM</a>
+          <div class="eknew">
+            <div class="user-profile"></div>
+            <!-- <span class="profile-name">John Doe</span> -->
+          </div>
+        </div>
+      </header>
+      <!-- end header section -->
+    </div>
+
+    <!-- why section -->
+
+    <section class="why_section layout_padding">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Why Choose <span>Us</span></h2>
+        </div>
+        <div class="why_container">
+          <div class="box">
+            <div class="img-box">
+              <img
+                src="{{ url_for('static', filename='images/w1.png') }}"
+                alt=""
+              />
+            </div>
+            <div class="detail-box">
+              <h5>Expertise in Fraud Detection</h5>
+              <p>
+                With years of experience and cutting-edge technology, we are
+                experts in detecting fake reviews. Our algorithms are finely
+                tuned to recognize even the most subtle patterns of fraudulent
+                behavior, ensuring that you receive only authentic and
+                trustworthy information.
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img
+                src="{{ url_for('static', filename='images/w2.png') }}"
+                alt=""
+              />
+            </div>
+            <div class="detail-box">
+              <h5>Personalized Recommendations</h5>
+              <p>
+                We understand that every consumer is unique. That's why our
+                recommendation engine is designed to provide personalized
+                suggestions tailored to your preferences and needs. Whether
+                you're searching for the perfect gadget or the ideal vacation
+                spot, our recommendations are customized to match your
+                individual tastes.
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img
+                src="{{ url_for('static', filename='images/w3.png') }}"
+                alt=""
+              />
+            </div>
+            <div class="detail-box">
+              <h5>Transparency and Accountability</h5>
+              <p>
+                At our core, we value transparency and accountability. We
+                believe in providing clear insights into our detection processes
+                and recommendation algorithms, so you can trust the results you
+                receive. With us, you'll always know how and why certain reviews
+                are flagged as fraudulent, giving you confidence in our
+                services.
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img
+                src="{{ url_for('static', filename='images/w4.png') }}"
+                alt=""
+              />
+            </div>
+            <div class="detail-box">
+              <h5>Commitment to Consumer Trust</h5>
+              <p>
+                Above all, we are committed to building and maintaining trust
+                with our users. By prioritizing accuracy, reliability, and
+                consumer empowerment, we strive to create a digital marketplace
+                where honesty and integrity prevail. Choose us to join the fight
+                against fake reviews and contribute to a more trustworthy online
+                ecosystem.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="btn-box">
+          <a href=""> Read More </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- end why section -->
+
+    <!-- info section -->
+
+    <section class="info_section layout_padding2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 info_col">
+            <div class="info_contact">
+              <h4>Address</h4>
+              <div class="contact_link_box">
+                <a href="">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span> Location </span>
+                </a>
+                <a href="">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <span> Call +01 1234567890 </span>
+                </a>
+                <a href="">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span> demo@gmail.com </span>
+                </a>
+              </div>
+            </div>
+            <div class="info_social">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 info_col">
+            <div class="info_detail">
+              <h4>Info</h4>
+              <p>
+                necessary, making this the first true generator on the Internet.
+                It uses a dictionary of over 200 Latin words, combined with a
+                handful
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-2 mx-auto info_col">
+            <div class="info_link_box">
+              <h4>Links</h4>
+              <div class="info_links">
+                <a class="active" href="index.html"> Home </a>
+                <a class="" href="about.html"> About </a>
+                <a class="" href="service.html"> Services </a>
+                <a class="" href="why.html"> Why Us </a>
+                <a class="" href="team.html"> Team </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 info_col">
+            <h4>Subscribe</h4>
+            <form action="#">
+              <input type="text" placeholder="Enter email" />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end info section -->
+
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='script/script.js') }}"
+    ></script>
+
+    <!-- jQery -->
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    ></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+    <!-- End Google Map -->
+  </body>
+</html>

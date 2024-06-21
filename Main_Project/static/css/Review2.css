@@ -1,0 +1,181 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+header {
+    background-image: linear-gradient(to right, rgb(4, 9, 110), rgb(2, 8, 74));
+    color: #fff;
+    padding: 3px 40px 0px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+header h2 {
+    cursor: pointer;
+  }
+
+  .header_links {
+    display: flex;
+    align-items: center;
+}
+
+.header_links a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 35px;
+}
+
+.header_links a:hover {
+    color: #56e5f8;
+}
+
+  .eknew {
+    display: flex;
+    align-items: center;
+  }
+
+.user-profile {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 7px;
+
+    /* Background image properties */
+    background-size: cover;
+    background-position: center;
+
+    background-image: url('https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png');
+}
+
+/* Container styles */
+.container {
+    display: flex;
+}
+
+.left-column {
+    width: 20%;
+    background-color: #f2f2f2;
+    height: 89vh;
+    position: sticky;
+    top: 72px;
+}
+
+.left_top {
+    padding: 20px;
+    height: 50vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #a1a1a1;
+}
+
+.left_btm {
+    position:sticky;
+    top: 60vh;
+}
+
+/* Price Meter */
+.price_meter {
+    /* width: 50%; */
+    margin: 20px auto;
+    padding: 0px 15px;
+}
+
+.price_meter > input {
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.price_meter > button {
+    margin-top: 10px;
+    width: 97%;
+    padding: 8px 16px;
+    background-color: #45b663;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.price_meter > button:hover {
+    background-color: #3d843b;
+}
+
+.right-column {
+    width: 70%;
+    padding: 20px;
+}
+
+
+/* Search bar styles */
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    width: 40%;
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#submitButton {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#submitButton:hover {
+    background-color: #0056b3;
+}
+
+/* Product cards styles */
+.card-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0px 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 17%; 
+    height: auto;
+}
+
+.product-card .details {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 20px;
+}

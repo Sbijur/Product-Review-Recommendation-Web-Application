@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReviewShield</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/User_profile.css') }}"
+    />
+
+    <style>
+      header {
+        background-image: linear-gradient(
+          to right,
+          rgb(4, 9, 110),
+          rgb(2, 8, 74)
+        );
+        height: 68px;
+        color: #fff;
+        padding: 3px 40px 0px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h2 {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .header_links {
+        display: flex;
+        align-items: center;
+      }
+
+      .header_links a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 35px;
+      }
+
+      .header_links a:hover {
+        color: #56e5f8;
+      }
+
+      .eknew {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-profile {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #fff;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 7px;
+
+        /* Background image properties */
+        background-size: cover;
+        background-position: center;
+
+        background-image: url("https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png");
+      }
+
+      .acc_hd_box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .prod_det_hd {
+        margin-left: 38%;
+      }
+
+      .logout-button {
+        background-color: #ff0000;
+        color: #fff;
+        padding: 8px 10px 8px 12px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+
+      .logout-button:hover {
+        background-color: #cc0000;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2 id="homeLink">ReviewShield</h2>
+      <div class="header_links">
+        <a href="/main">HOME</a>
+        <a href="/categories">CATEGORIES</a>
+        <a href="/about">ABOUT</a>
+        <a href="/faq">WHY US</a>
+        <a href="/contact">TEAM</a>
+        <div class="eknew">
+          <div class="user-profile"></div>
+          <!-- <span class="profile-name">John Doe</span> -->
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="user-profile-container">
+        <div class="acc_hd_box">
+          <h2 class="prod_det_hd">Account Details</h2>
+          <a href="/logout" class="logout-button">Logout <i class="fa fa-sign-out" style="font-size:18px;color:white"></i></a>
+        </div>
+        <div class="user-details">
+          <div class="user-picture">
+            <!-- Dummy user picture -->
+            <img
+              src="https://e7.pngegg.com/pngimages/674/524/png-clipart-professional-computer-icons-avatar-job-avatar-heroes-computer.png"
+              alt="User Picture"
+            />
+          </div>
+          <div class="user-info">
+            <p><strong>User ID:</strong> {{ user_data.user_id }}</p>
+            <p><strong>User Name:</strong> {{ user_data.user_name }}</p>
+            <p><strong>Phone Number:</strong> {{ user_data.phone_number }}</p>
+            <p><strong>Email:</strong> {{ user_data.email }}</p>
+            <p><strong>Address:</strong> {{ user_data.address }}</p>
+          </div>
+        </div>
+        <div class="mera_good_container">
+          <div class="left-column">
+            <h3>Purchase History</h3>
+            <div class="purchase-history">
+              <div id="purchaseHistory"></div>
+            </div>
+          </div>
+          <div class="right-column">
+            <h3>Recommended Products</h3>
+            <div class="purchase-history">
+              <div id="recommendProducts"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      // Pass the loginUserID to the script.js file
+      const loginUserID = "{{ loginUserID }}";
+    </script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='script/script.js') }}"
+    ></script>
+  </body>
+</html>
